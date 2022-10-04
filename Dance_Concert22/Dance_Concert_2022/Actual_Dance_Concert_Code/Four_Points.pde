@@ -1,7 +1,5 @@
 class Four extends Scene {
 
-
-
   void display() {
     image(depthImg, 0, 0);
     image(depthImg, width/2, 0);
@@ -10,6 +8,8 @@ class Four extends Scene {
   }
 
   void keyPressed() {
+    
+    //mirroring images
     if (key=='a') {
       PImage YES = depthImg.copy();
       PImage NO = depthImg.copy();

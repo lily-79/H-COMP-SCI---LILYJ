@@ -5,7 +5,7 @@ class Two extends Scene {
     image(depthImg, 0, height/2);
   }
 
-
+//tinting image
   void keyPressed() {
     if(key=='a'){
       tint(#FF0000);
