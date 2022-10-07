@@ -5,10 +5,11 @@ class Two extends Scene {
     image(depthImg, 0, height/2);
   }
 
-//tinting image
+  //tinting image
   void keyPressed() {
-    if(key=='a'){
-      tint(#FF0000);
+    if (key=='a') {
+      Delay(depthImg,0,height/2,300 );
+      image(depthImg, width/2, height/2);
     }
   }
 }

@@ -1,51 +1,59 @@
-import processing.video.*;
+import org.openkinect.freenect.*;
+import org.openkinect.processing.*;
 import java.util.*;
 
 
-Capture cam;
+Kinect kinect;
+PImage depthImg;
+int minDepth =  500;
+int maxDepth = 700;
+
+
 ArrayDeque<PImage> buffer = new ArrayDeque<PImage>();
 
 
 void setup()
 {
   size(640, 960);
-  String[] cameras = Capture.list();
-
-  if (cameras.length == 0)
-  {
-    println("There are no cameras available for capture.");
-    exit();
-  } else
-  {
-    println("Available cameras:");
-    for (int i = 0; i < cameras.length; i++)
-      println(cameras[i]);
-
-    cam = new Capture(this, 640, 480, "FaceTime HD Camera (Built-in)", 30);
-    cam.start();
-  }
+  kinect = new Kinect(this);
+  kinect.initDepth();
+  depthImg = new PImage(kinect.width, kinect.height);
 }
 
+void updateDepthImage()
+{
+  int[] rawDepth = kinect.getRawDepth();
+
+  for (int i=0; i < rawDepth.length; i++) {
+    if (rawDepth[i] >= minDepth && rawDepth[i] <= maxDepth) {
+      depthImg.pixels[i] = color(255);
+    } else {
+      depthImg.pixels[i] = color(0);
+    }
+  }
+
+  // Draw the thresholded image
+  depthImg.updatePixels();
+}
 
 void draw()
 {
-  if (cam.available())
-    cam.read();
+  updateDepthImage();
 
-  PImage temp = cam.copy();
+  PImage temp = depthImg.copy();
   buffer.addFirst(temp);
 
-  PImage first = buffer.getFirst(); // get*() does not remove the PImage
-  image(first, 0, 0);
+  // PImage first = buffer.getFirst(); // get*() does not remove the PImage
+  // image(first, 0, 0);
 
-  fill(255);
-  textSize(30);
-  textAlign(CENTER);
-  text("frames: " + buffer.size(), width/2, 480);
+  //fill(255);
+  //textSize(30);
+  // textAlign(CENTER);
+  // text("frames: " + buffer.size(), width/2, 480);
 
-  if (frameCount < 300)
+  if (frameCount < 100)
     return;
 
   PImage last = buffer.removeLast();
-  image(last, 0, 480);
+  image(last, 0, 0);
 }
