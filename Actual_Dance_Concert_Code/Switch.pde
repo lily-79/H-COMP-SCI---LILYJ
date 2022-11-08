@@ -36,7 +36,7 @@ int[][] threshold(int[][] pixelArray) {
     if (c < low || c > high)
       newArray[i][j] = 0;
     else
-      newArray[i][j] = 0xffffffff;
+      newArray[i][j] = 0xffffff;
   }
 
   return newArray;

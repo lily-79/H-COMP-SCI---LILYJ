@@ -7,19 +7,27 @@ int i;
 Kinect kinect;
 PImage depthImg;
 int minDepth =  200;
-int maxDepth = 1025;
+int maxDepth = 700;
 
 void setup() {
+  background(0);
   noCursor();
   fullScreen();
   kinect = new Kinect(this);
   kinect.initDepth();
   depthImg = new PImage(kinect.width, kinect.height);
-  scenes.add(new Four());
-  scenes.add(new Two());
+  scenes.add(new One());//two beats + black screen
+  scenes.add(new Three()); //one person
+  scenes.add(new Four());//black screen
+  scenes.add(new Five());//four people 
+  scenes.add(new Six());//delay w/ four people 
+  scenes.add(new Four());//black screen
+  scenes.add(new Three());//one person
+  scenes.add(new Four());//black screen
+  scenes.add(new Two());//four people in red
 }
 
-void updateDepthImage()
+ void updateDepthImage()
 {
   // Threshold the depth image
   int[] rawDepth = kinect.getRawDepth();
@@ -27,7 +35,7 @@ void updateDepthImage()
     if (rawDepth[i] >= minDepth && rawDepth[i] <= maxDepth) {
       depthImg.pixels[i] = color(255);
     } else {
-      depthImg.pixels[i] = color(0);
+      depthImg.pixels[i] = color(0,0,0,50);
     }
   }
 
@@ -36,7 +44,6 @@ void updateDepthImage()
 }
 
 void draw() {
-  background(0);
   updateDepthImage();
   current = scenes.get(i);
   current.display();
@@ -44,7 +51,7 @@ void draw() {
 }
 
 void keyPressed() {
-  if (key=='z') {
+  if (key=='q') {
     i+=1;
   }
 }

@@ -10,5 +10,5 @@ void Delay(PImage x, int h, int w, int t){
     return;
 
   PImage last = buffer.removeLast();
-  image(last, h,w);
+  image(last,h,w);
 }
