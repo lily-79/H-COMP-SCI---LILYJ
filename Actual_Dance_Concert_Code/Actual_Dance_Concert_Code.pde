@@ -19,15 +19,15 @@ void setup() {
   scenes.add(new One());//two beats + black screen
   scenes.add(new Three()); //one person
   scenes.add(new Four());//black screen
-  scenes.add(new Five());//four people 
-  scenes.add(new Six());//delay w/ four people 
+  scenes.add(new Five());//four people
+  scenes.add(new Six());//delay w/ four people
   scenes.add(new Four());//black screen
   scenes.add(new Three());//one person
   scenes.add(new Four());//black screen
   scenes.add(new Two());//four people in red
 }
 
- void updateDepthImage()
+void updateDepthImage()
 {
   // Threshold the depth image
   int[] rawDepth = kinect.getRawDepth();
@@ -35,7 +35,7 @@ void setup() {
     if (rawDepth[i] >= minDepth && rawDepth[i] <= maxDepth) {
       depthImg.pixels[i] = color(255);
     } else {
-      depthImg.pixels[i] = color(0,0,0,50);
+      depthImg.pixels[i] = color(0, 0, 0, 50);
     }
   }
 

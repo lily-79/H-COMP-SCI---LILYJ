@@ -1,5 +1,8 @@
 class Two extends Scene {
 
+  void setup() {
+    background(0);
+  }
   void display() {
     tint(#FF0000);
     PImage YES = depthImg.copy();
@@ -11,7 +14,7 @@ class Two extends Scene {
   }
 
   void keyPressed() {
-    if(key=='1'){
+    if (key=='1') {
       background(0);
     }
   }

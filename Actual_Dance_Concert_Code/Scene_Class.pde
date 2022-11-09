@@ -2,6 +2,9 @@ class Scene {
   Scene() {
   }
 
+  void setup() {
+  }
+
   void display() {
   }
 

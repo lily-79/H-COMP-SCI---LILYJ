@@ -1,10 +1,14 @@
 class Three extends Scene {
-
+ 
+  void setup() {
+    background(0);
+  }
+  
   void display() {
-   image(depthImg,500,500);
+    background(0);
+    image(depthImg, 500, 500);
   }
 
   void keyPressed() {
-    
   }
 }

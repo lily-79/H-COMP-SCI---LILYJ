@@ -2,7 +2,7 @@
 import java.util.*;
 ArrayDeque<PImage> buffer = new ArrayDeque<PImage>();
 
-void Delay(PImage x, int h, int w, int t){
+void Delay(PImage x, int h, int w, int t) {
   PImage temp = x.copy();
   buffer.addFirst(temp);
 
@@ -10,5 +10,5 @@ void Delay(PImage x, int h, int w, int t){
     return;
 
   PImage last = buffer.removeLast();
-  image(last,h,w);
+  image(last, h, w);
 }
