@@ -2,6 +2,8 @@ int[] starX = new int[1000];
 int[] starY = new int[1000];
 color[] starColor = new color[1000];
 int starSize = 3; // the size of the twinkling stars
+float t = 255;
+boolean toFadeIn = false;
 
 // the tail of the shooting star
 int[] shootX = new int[30];
@@ -80,6 +82,12 @@ void draw() {
   if (random(50) < 1 && ssTimer == -1) {
     newShootingStar();
   }
+  if(toFadeIn){
+      t-=1;
+    }
+    noStroke();
+    fill(0,t);
+    rect(0,0,width,height);
 }
 
 /*
@@ -100,4 +108,8 @@ void newShootingStar() {
     shootX[i] = startX;
     shootY[i] = startY;
   }
+}
+
+void keyPressed(){
+  toFadeIn = true;
 }
